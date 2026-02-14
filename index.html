@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Life-Changing Question</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel:wght@400;700&family=Great+Vibes&display=swap');
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cinzel', serif;
+            background: radial-gradient(circle, #1a1a2e 0%, #0f172a 100%);
+            overflow: hidden;
+            text-align: center;
+            color: #d4af37;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(15px);
+            max-width: 500px;
+            width: 85%;
+            z-index: 10;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: #d4af37;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #d4af37;
+            margin: 1rem 0 2rem 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            height: 80px;
+        }
+
+        #yesBtn {
+            padding: 15px 50px;
+            font-size: 1.3rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            background: linear-gradient(45deg, #d4af37, #f1d592);
+            color: #1a1a2e;
+            border: none;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            z-index: 100; /* Ensures it is always on top */
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        #noBtn {
+            padding: 10px 30px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            position: absolute; /* Set to absolute relative to body */
+            transition: 0.1s ease;
+            z-index: 50;
+        }
+
+        #successScreen {
+            display: none;
+        }
+
+        .vows-list {
+            text-align: left;
+            color: #ffffff;
+            line-height: 2;
+            font-size: 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .vows-list li:before {
+            content: "✦ ";
+            color: #d4af37;
+            margin-right: 10px;
+        }
+
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin-top: 20px;
+            color: #d4af37;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <span class="arabic">يا حياتي و روحي</span>
+        <h1>Will you become the</h1>
+        <h2>Queen of Sani Sani Gonto's Heart?</h2>
+        <div class="buttons">
+            <button id="yesBtn" onclick="showSuccess()">YES</button>
+            <button id="noBtn" onmouseover="moveButton()">NO</button>
+        </div>
+    </div>
+
+    <div class="container" id="successScreen">
+        <span class="arabic" style="font-size: 1.5rem;">أنتِ كلي</span>
+        <h1>Congratulations!</h1>
+        <p style="color: #ddd;">You have officially become the luckiest girl on earth.</p>
+        <p>By clicking <strong>YES</strong>, you agree to:</p>
+        <ul class="vows-list">
+            <li>A lifetime of deep respect and total devotion.</li>
+            <li>Endless adventures with me by your side.</li>
+            <li>A home filled with laughter and unwavering loyalty.</li>
+            <li>Someone who will always protect your smile and cherish your soul.</li>
+        </ul>
+        <div class="signature">Sani Sani Gonto</div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+
+        // Initial placement of No button
+        function positionNoButton() {
+            const rect = yesBtn.getBoundingClientRect();
+            noBtn.style.left = (rect.right + 30) + 'px';
+            noBtn.style.top = rect.top + 'px';
+        }
+        
+        window.onload = positionNoButton;
+
+        function moveButton() {
+            // This calculates a random position anywhere in the visible window
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.position = 'fixed'; // Changes to fixed so it can move anywhere
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        function showSuccess() {
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'block';
+            noBtn.style.display = 'none';
+        }
+    </script>
+</body>
